@@ -1,9 +1,29 @@
-var expect = require('chai').expect;
+process.env.NODE_ENV = 'test';
 
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      expect([1,2,3].indexOf(4)).to.eql(-1);
+var Browser = require('zombie');
+var expect = require('chai').expect;
+var http = require('http');
+
+var app = require('../../app.js');
+
+describe('Visitor', function() {
+  before(function(){
+    this.server = http.createServer(app).listen(9393);
+    this.browser = new Browser({ site: 'http://localhost:9393' });
+    //this.browser.silent = true; // suppress console.log statements
+  })
+
+  context('when visiting the homepage', function() {
+    before(function(done){
+      this.browser.visit('/', done);
+    })
+
+    it('should see the app title', function() {
+      expect(this.browser.text('h1')).to.eql("Login.gov OIDC Client (Express.js)");
     });
+  });
+
+  after(function(done) {
+    this.server.close(done); // stop the server when done!
   });
 });
