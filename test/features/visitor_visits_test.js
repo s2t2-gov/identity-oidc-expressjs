@@ -6,11 +6,13 @@ var http = require('http');
 
 var app = require('../../app.js');
 
+//Browser.silent = true; // isn't working...
+
 describe('Visitor', function() {
   before(function(){
     this.server = http.createServer(app).listen(9393);
     this.browser = new Browser({ site: 'http://localhost:9393' });
-    //this.browser.silent = true; // suppress console.log statements
+    //this.browser.silent = true; // isn't working...
   })
 
   context('when visiting the homepage', function() {

@@ -42,3 +42,9 @@
   + [Login.gov SVG](https://github.com/18F/identity-sp-sinatra/blob/master/public/img/login-gov.svg)
   + [Stylesheet](https://github.com/18F/identity-sp-sinatra/blob/master/public/css/lib/basscss.min.css)
   + [Page Content](https://github.com/18F/identity-sp-sinatra/blob/master/views/success.erb)
+
+### Testing
+
+  + [Mocha docs](https://mochajs.org/)
+  + [Chai docs](http://chaijs.com/)
+  + [Blog post on testing with Zombie](http://www.redotheweb.com/2013/01/15/functional-testing-for-nodejs-using-mocha-and-zombie-js.html)
