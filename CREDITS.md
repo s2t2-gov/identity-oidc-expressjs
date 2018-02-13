@@ -50,3 +50,4 @@
   + [Blog post on testing with Zombie](http://www.redotheweb.com/2013/01/15/functional-testing-for-nodejs-using-mocha-and-zombie-js.html)
   + Puppeteer:
     + [Handling Unhandled Promise errors](https://github.com/GoogleChrome/puppeteer/issues/1390#issuecomment-344506047)
+    + [Getting Started with Puppeteer and Mocha](https://medium.com/@ankit_m/ui-testing-with-puppeteer-and-mocha-part-1-getting-started-b141b2f9e21)
