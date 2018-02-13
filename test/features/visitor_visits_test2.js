@@ -1,52 +1,32 @@
 process.env.NODE_ENV = 'test';
 
+var expect = require('chai').expect;
 const puppeteer = require('puppeteer');
 
-async function run() {
-  const browser = await puppeteer.launch({headless: true});
-  const page = await browser.newPage();
+var app = require('../../app.js');
 
-  try {
-    await page.goto('http://localhost:9393');
-    await page.screenshot({ path: 'homepage.png' });
-  } catch (error) {
-    console.log(error);
-    browser.close();
-  }
+describe('Visitor', function() {
+  before(async function(){
+    this.server = app.listen(9393);
+    this.browser = await puppeteer.launch({headless: true});
+  });
 
-  browser.close();
-}
+  context('when visiting the homepage', function() {
+    before(async function(){
+      this.page = await this.browser.newPage();
+      await this.page.goto('http://localhost:9393');
+      await this.page.screenshot({ path: 'homepage.png' });
+    })
 
-run();
+    it('should see the app title', async function() {
+      //const headingText = await this.page.$('h1');
+      const headingText = await this.page.title()
+      expect(headingText).to.eql("Login.gov OIDC Client (Express.js)")
+    });
+  });
 
-
-//var expect = require('chai').expect;
-//var app = require('../../app.js');
-//
-//describe('Visitor', function() {
-//  //before(function(){
-//  //  this.browser = await puppeteer.launch()
-//  //})
-//
-//  context('when visiting the homepage', function() {
-//    //before(function(done){
-//    //  this.browser.visit('/', done);
-//    //})
-//
-//    it('should see the app title', function() {
-//      const browser = await puppeteer.launch();
-//      const page = await browser.newPage();
-//
-//      await page.goto('https://github.com');
-//      await page.screenshot({ path: 'screenshots/github.png' });
-//
-//      browser.close();
-//
-//      //expect(this.browser.text('h1')).to.eql("Login.gov OIDC Client (Express.js)");
-//    });
-//  });
-//
-//  //after(function(done) {
-//  //  this.server.close(done); // stop the server when done!
-//  //});
-//});
+  after(function(done) {
+    this.browser.close();
+    this.server.close(done);
+  });
+});
