@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "mocha test/features --recursive",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
